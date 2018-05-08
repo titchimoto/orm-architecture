@@ -1,0 +1,88 @@
+For each of these skills, write pseudo-code (like the post = Post.all.first example above) to demonstrate 
+how your application might perform these tasks through an ORM. For each code sample, also write a 
+corresponding SQL statement.
+
+-----------------------------------------------------------
+- remove duplicates in a query response
+
+#pseudocode
+posts = Post.all
+posts.title.distinct
+
+#sql
+SELECT DISTINCT title FROM post;
+
+-----------------------------------------------------------
+- filter records using inequalities, pattern matching, ranges, and boolean logic
+
+#pseudocode
+Comment.all.find(user_id = 1).and(post_id = 5 )
+
+
+#sql
+SELECT * FROM post WHERE id = 1;
+
+SELECT body FROM comment WHERE user_id = 1 AND post_id = 5;
+
+-----------------------------------------------------------
+- sort records in a particular order
+
+#pseudocode
+posts = Post.all
+posts.order_by(id)
+
+#sql
+SELECT * FROM post ORDER BY id;
+
+-----------------------------------------------------------
+- limit the number of records returned
+
+#pseudocode
+users = User.all
+users.limit(5);
+
+
+#sql
+SELECT * FROM user LIMIT 5;
+
+-----------------------------------------------------------
+- group records into sections
+
+#pseudocode
+posts = Post.all
+posts.group_by(user_id)
+
+#sql
+SELECT * FROM post GROUP BY user_id;
+
+-----------------------------------------------------------
+- perform calculations using aggregate functions
+
+#pseudocode
+user = User.where(id = 1)
+post_count = user.posts.count
+
+#sql
+SELECT COUNT(*) FROM post WHERE user_id = 1;
+
+-----------------------------------------------------------
+- join tables using cross join, inner join, and outer join
+
+#pseudocode
+posts = Post.all
+users = User.all
+posts.join(users).on(user.id = post.user_id)
+
+#sql
+SELECT * 
+FROM post 
+JOIN user ON user.id = post.user_id;
+
+SELECT * 
+FROM post
+LEFT OUTER JOIN user ON user.id = post.user_id;
+
+SELECT *
+FROM post
+CROSS JOIN comment ON post.id = comment.post_id;
+
